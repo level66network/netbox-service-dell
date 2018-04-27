@@ -4,7 +4,7 @@ You need to request access to the Dell Warranty Status API to be able to make AP
 ## NetBox
 ### Preparation
 #### Custom fields
-You need to create two custom fields and attatch them to the object type dcim > device. This formular can be found under Username > Admin > Extras > Custom fields.
+You need to create the following custom fields and attatch them to the object type dcim > device. This formular can be found under Username > Admin > Extras > Custom fields.
 * service_until / Date
 * service_type / Text
 #### API access
