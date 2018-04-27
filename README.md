@@ -9,3 +9,5 @@ You need to create two custom fields and attatch them to the object type dcim > 
 * service_type / Text
 #### API access
 You need to create a User Token with read and write access. This option can be found under Username > Profile > API Tokens > Add a token.
+## Python
+* pip3 install requests
