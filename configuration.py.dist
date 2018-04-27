@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+NETBOX = {
+	'API_URL': 'https://demo.netbox.de/api/',
+	'API_TOKEN': 'testtoken',
+}
+
+DELL = {
+
+}
