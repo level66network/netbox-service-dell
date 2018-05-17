@@ -25,21 +25,29 @@ if r.status_code == 200:
 						"""Check http status code."""
 						if r.status_code == 200:
 							dellJSON = json.loads(r.text)
-							serviceCode = ''
-							serviceDate = ''
+							serviceCode = False
+							serviceDate = False
 							for service in dellJSON['AssetWarrantyResponse'][0]['AssetEntitlementData']:
 								service['EndDate'] = datetime.strptime(service['EndDate'], '%Y-%m-%dT%X')
 								if service['EndDate'] > datetime.now():
-									serviceCode = functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode'])
-									serviceDate = service['EndDate']
+									if functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode']) == service['ServiceLevelCode']:
+										serviceCode = functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode'])
+										serviceDate = service['EndDate']
+							"""Check if device is still in service."""
+							if serviceCode != False and serviceDate != False:
+								"""Prepare best service."""
+								serviceDate = serviceDate.strftime('%Y-%m-%d')
+								serviceName = functions.dellServiceCode(serviceCode)
+							else:
+								"""Device out of service."""
+								serviceDate = ""
+								serviceName = ""
 							"""Prepare data to update the device in Netbox."""
-							serviceDate = serviceDate.strftime('%Y-%m-%d')
-							serviceName = functions.dellServiceCode(serviceCode)
 							patchData = '{"custom_fields": {"service_until": "' + serviceDate + '", "service_type": "' + serviceName + '"}}'
 							r = requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
 							if r.status_code != 200:
-								print 'Error updating values in Netbox.'
+								print '-- Error updating values in Netbox.'
 						else:
-							print 'Error with the Dell API.'
+							print '- Error with the Dell API.'
 else:
 	exit('Netbox request not working! HTTP status code: ' + str(r.status_code))

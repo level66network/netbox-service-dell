@@ -19,7 +19,7 @@ def dellServiceCode(code):
 def dellCompareServiceCode(code1, code2):
 	"""Returns the better code."""
 	weights = {
-		'': 0,
+		False: 0,
 		'PO': 10,
 		'NU': 20,
 		'PG': 30,
