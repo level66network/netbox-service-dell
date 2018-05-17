@@ -36,8 +36,7 @@ if r.status_code == 200:
 							serviceDate = serviceDate.strftime('%Y-%m-%d')
 							serviceName = functions.dellServiceCode(serviceCode)
 							patchData = '{"custom_fields": {"service_until": "' + serviceDate + '", "service_type": "' + serviceName + '"}}'
-							r = 
-requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
+							r = requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
 							if r.status_code != 200:
 								print 'Error updating values in Netbox.'
 						else:
