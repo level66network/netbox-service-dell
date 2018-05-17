@@ -13,6 +13,8 @@ def dellServiceCode(code):
 		return 'ProSupport NBD'
 	elif code == 'PG':
 		return 'ProSupport Plus NBD'
+	elif code == '4I':
+		return 'ProSupport 4H'
 	elif code == 'ND':
 		return 'Onsite Service NBD'
 
@@ -25,6 +27,7 @@ def dellCompareServiceCode(code1, code2):
 		'NI': 20,
 		'PG': 30,
 		'ND': 40,
+		'4I': 50,
 	}
 	if weights[code1] >= weights[code2]:
 		return code1
