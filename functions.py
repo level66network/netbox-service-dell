@@ -9,7 +9,7 @@ def dellServiceCode(code):
 	"""Maps the codes to short descriptions."""
 	if code == 'PO':
 		return 'Parts only'
-	elif code == 'NU':
+	elif code == 'NU' or code == 'NI':
 		return 'ProSupport NBD'
 	elif code == 'PG':
 		return 'ProSupport Plus NBD'
@@ -22,6 +22,7 @@ def dellCompareServiceCode(code1, code2):
 		False: 0,
 		'PO': 10,
 		'NU': 20,
+		'NI': 20,
 		'PG': 30,
 		'ND': 40,
 	}
