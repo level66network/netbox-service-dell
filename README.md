@@ -9,6 +9,6 @@ You need to create the following custom fields and attatch them to the object ty
 * service_type / Text
 #### API access
 You need to create a User Token with read and write access. This option can be found under Username > Profile > API Tokens > Add a token.
-## Python 3
+## Python 2.7
 Install requirements via:
-   pip3 install -r requirements.txt
+   pip2 install -r requirements.txt
