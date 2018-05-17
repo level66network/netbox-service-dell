@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
-def buildURL(url, component):
-	url = url.strip().strip('/')
-	return url + '/' + component + '/?format=json'
+def extendURL(url, extend):
+	url = url.strip().strip('/') + '/' + extend.strip().strip('/')
+	return url
