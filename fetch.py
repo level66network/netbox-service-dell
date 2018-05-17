@@ -10,7 +10,7 @@ dellHeaders = {'content-type': 'application/json'}
 devicesURL = functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/')
 
 """Fetch Netbox devices and check http status code."""
-r = requests.get(devicesURL, headers=netboxHeaders)
+r = requests.get(devicesURL, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
 if r.status_code == 200:
 	requestReturnJSON = json.loads(r.text)
 	if requestReturnJSON['count'] > 0:
@@ -36,7 +36,8 @@ if r.status_code == 200:
 							serviceDate = serviceDate.strftime('%Y-%m-%d')
 							serviceName = functions.dellServiceCode(serviceCode)
 							patchData = '{"custom_fields": {"service_until": "' + serviceDate + '", "service_type": "' + serviceName + '"}}'
-							r = requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders)
+							r = 
+requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
 							if r.status_code != 200:
 								print 'Error updating values in Netbox.'
 						else:
