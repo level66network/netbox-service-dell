@@ -2,6 +2,9 @@
 NETBOX = {
 	'API_URL': 'https://demo.netbox.de/api/',
 	'API_TOKEN': 'testtoken',
+        'MANUFACTURER_SLUGS': {
+                'dell',
+        }
 }
 
 DELL = {
