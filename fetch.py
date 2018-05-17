@@ -42,4 +42,4 @@ if r.status_code == 200:
 						else:
 							print 'Error with the Dell API.'
 else:
-	exit('Netbox request not working! HTTP status code: ' + r.status_code)
+	exit('Netbox request not working! HTTP status code: ' + str(r.status_code))
