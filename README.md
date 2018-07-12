@@ -12,8 +12,11 @@ You need to create a User Token with read and write access. This option can be f
 ### Export templates
 #### Maintenance Report
 Content type: dcim > device
+
 Name: Maintenance Report
+
 Template code:
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -47,8 +50,11 @@ Template code:
   </body>
 </html>
 ```
+
 Mime type: xhtml+xml
+
 File extension: html
+
 ## Python 2.7
 Install requirements via:
    pip2 install -r requirements.txt
