@@ -11,12 +11,12 @@ You need to create the following custom fields and attatch them to the object ty
 You need to create a User Token with read and write access. This option can be found under Username > Profile > API Tokens > Add a token.
 ### Export templates
 #### Maintenance Report
-Content type: dcim > device
-
-Name: Maintenance Report
+* Content type: dcim > device
+* Name: Maintenance Report
+* Mime type: xhtml+xml
+* File extension: html
 
 Template code:
-
 ```html
 <!DOCTYPE html>
 <html>
@@ -50,10 +50,6 @@ Template code:
 	</body>
 </html>
 ```
-
-Mime type: xhtml+xml
-
-File extension: html
 
 ## Python 2.7
 Install requirements via:
