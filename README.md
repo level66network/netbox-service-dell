@@ -57,4 +57,6 @@ File extension: html
 
 ## Python 2.7
 Install requirements via:
-   pip2 install -r requirements.txt
+```bash
+pip2 install -r requirements.txt
+```
