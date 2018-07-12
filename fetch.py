@@ -7,7 +7,7 @@ import functions
 
 netboxHeaders = {'content-type': 'application/json', 'Authorization': 'Token ' + configuration.NETBOX['API_TOKEN']}
 dellHeaders = {'content-type': 'application/json'}
-devicesURL = functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/')
+devicesURL = functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/?limit=99999')
 
 """Fetch Netbox devices and check http status code."""
 r = requests.get(devicesURL, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
@@ -27,12 +27,16 @@ if r.status_code == 200:
 							dellJSON = json.loads(r.text)
 							serviceCode = False
 							serviceDate = False
-							for service in dellJSON['AssetWarrantyResponse'][0]['AssetEntitlementData']:
-								service['EndDate'] = datetime.strptime(service['EndDate'], '%Y-%m-%dT%X')
-								if service['EndDate'] > datetime.now():
-									if functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode']) == service['ServiceLevelCode']:
-										serviceCode = functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode'])
-										serviceDate = service['EndDate']
+							try:
+								for service in dellJSON['AssetWarrantyResponse'][0]['AssetEntitlementData']:
+									service['EndDate'] = datetime.strptime(service['EndDate'], '%Y-%m-%dT%X')
+									if service['EndDate'] > datetime.now():
+										if functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode']) == service['ServiceLevelCode']:
+											serviceCode = functions.dellCompareServiceCode(serviceCode, service['ServiceLevelCode'])
+											serviceDate = service['EndDate']
+							except IndexError:
+								print '-# Error fetching data'
+
 							"""Check if device is still in service."""
 							if serviceCode != False and serviceDate != False:
 								"""Prepare best service."""
