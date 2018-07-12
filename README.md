@@ -15,8 +15,7 @@ You need to create a User Token with read and write access. This option can be f
 * Name: Maintenance Report
 * Mime type: xhtml+xml
 * File extension: html
-
-Template code:
+* Template code:
 ```html
 <!DOCTYPE html>
 <html>
