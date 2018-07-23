@@ -7,7 +7,7 @@ import functions
 
 netboxHeaders = {'content-type': 'application/json', 'Authorization': 'Token ' + configuration.NETBOX['API_TOKEN']}
 dellHeaders = {'content-type': 'application/json'}
-devicesURL = functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/?limit=99999')
+devicesURL = functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/?limit=0')
 
 """Fetch Netbox devices and check http status code."""
 r = requests.get(devicesURL, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
