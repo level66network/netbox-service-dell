@@ -48,11 +48,22 @@ if r.status_code == 200:
 								serviceDate = ""
 								serviceName = ""
 								print '-# Out of service'
-							"""Prepare data to update the device in Netbox."""
-							patchData = '{"custom_fields": {"service_until": "' + serviceDate + '", "service_type": "' + serviceName + '"}}'
-							r = requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
-							if r.status_code != 200:
-								print '-- Error updating values in Netbox.'
+
+							"""Prepare data for update check."""
+							if device['custom_fields']['service_type'] is None:
+								device['custom_fields']['service_type'] = ''
+							if device['custom_fields']['service_until'] is None:
+                                                                device['custom_fields']['service_until'] = ''
+
+							"""Check if device needs update."""
+							if serviceName != device['custom_fields']['service_type'] or serviceDate != device['custom_fields']['service_until']:
+								"""Prepare data to update the device in Netbox."""
+								patchData = '{"custom_fields": {"service_until": "' + serviceDate + '", "service_type": "' + serviceName + '"}}'
+								r = requests.patch(functions.extendURL(configuration.NETBOX['API_URL'], '/dcim/devices/' + str(device['id']))+'/', data=patchData, headers=netboxHeaders, verify=configuration.NETBOX['API_SSL_VERIFY'])
+								if r.status_code != 200:
+									print '-- Error updating values in Netbox.'
+							else:
+								print '-- No need to update the device.'
 						else:
 							print '- Error with the Dell API.'
 else:
