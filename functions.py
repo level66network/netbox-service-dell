@@ -9,6 +9,8 @@ def dellServiceCode(code):
 	"""Maps the codes to short descriptions."""
 	if code == 'PO':
 		return 'Parts only'
+	elif code == 'UD':
+		return 'VMware Workload'
 	elif code == 'RB':
 		return 'Carry-in'
 	elif code == 'NU' or code == 'NI':
@@ -32,6 +34,7 @@ def dellCompareServiceCode(code1, code2):
 	"""Returns the better code."""
 	weights = {
 		False: 0,
+		'UD': 0,
 		'PO': 10,
 		'RB': 15,
 		'NU': 20,
