@@ -27,6 +27,8 @@ def dellServiceCode(code):
 		return 'ProSupport 4H'
 	elif code == 'PQ':
 		return 'ProSupport Plus 4H'
+	elif code == '78':
+		return '8 Hour 7x24 Compellent Support'
 	else:
 		return ''
 
@@ -42,6 +44,7 @@ def dellCompareServiceCode(code1, code2):
 		'PG': 30,
 		'SW': 30,
 		'ND': 40,
+		'78': 45,
 		'8I': 45,
 		'8U': 45,
 		'4I': 50,
